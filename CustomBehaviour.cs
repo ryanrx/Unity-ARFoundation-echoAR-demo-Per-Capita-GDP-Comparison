@@ -109,12 +109,12 @@ public class CustomBehaviour : MonoBehaviour
                             if (data.stat != stat)
                             {
                                 float side = (float)System.Math.Pow(stat, (1.0 / 3));
-                                float scale = side / maxSide;
+                                float scale = side / maxSide / 10f;
 
                                 float oldSide = (float)System.Math.Pow(data.stat, (1.0 / 3));
-                                float oldScale = oldSide / maxSide;
+                                float oldScale = oldSide / maxSide / 10f;
                                 data.categ.transform.localScale = new Vector3(scale, scale, scale);
-                                data.categ.transform.position += new Vector3(9f * (scale - oldScale), 0, -4f * (scale - 0.5f - (oldScale - 0.5f)));
+                                data.categ.transform.position += new Vector3(9f * (scale - oldScale), 0, -30f * (scale * scale - oldScale * oldScale));
                                 data.stat = stat;
                             }
                         }
@@ -130,9 +130,11 @@ public class CustomBehaviour : MonoBehaviour
                             float side = (float)System.Math.Pow(stat, (1.0 / 3));
 
                             // scale and position the new game object
-                            float scale = side / maxSide;
+                            float scale = side / maxSide / 10f;
+                            float xdisp = 9f * scale;
+                            float zdisp = -30f * scale * scale;
                             categ.transform.localScale = new Vector3(scale, scale, scale);
-                            categ.transform.position = new Vector3(5f * count + 9f * scale, 0, -4f * (scale - 0.5f));
+                            categ.transform.position = new Vector3(1f + 0.3f * count + xdisp, 0, zdisp);
                             count++;
                             //Debug.Log(count);
 
@@ -146,9 +148,10 @@ public class CustomBehaviour : MonoBehaviour
                             GameObject text = new GameObject();
                             TextMesh t = text.AddComponent<TextMesh>();
                             t.text = category;
-                            t.fontSize = 10;
+                            t.fontSize = 100;
                             text.name = "Text " + category;
-                            text.transform.position = categ.transform.position - new Vector3(9f * scale, 0, -4f * (scale - 0.5f));
+                            text.transform.position = categ.transform.position - new Vector3(xdisp, 0, zdisp);
+                            text.transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
                             text.transform.eulerAngles = new Vector3(0, 0, 90);
 
                             text.transform.parent = ballBase.transform;
@@ -157,7 +160,7 @@ public class CustomBehaviour : MonoBehaviour
                             data = new Data(stat, categ, text);
 
                             dataMap.Add(category, data);
-               
+
                         }
                     }
                     // delete parent object if the category no longer exists 
