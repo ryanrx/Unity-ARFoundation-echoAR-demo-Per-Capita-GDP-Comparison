@@ -21,7 +21,7 @@ public class CustomBehaviour : MonoBehaviour
     /// </summary>
     ///
 
-    // list of category names to look for
+    // list of category names to look for, feel free to add more countries
     private string[] categNames =
     {
         "USA",
@@ -81,7 +81,6 @@ public class CustomBehaviour : MonoBehaviour
         {
             this.gameObject.transform.localScale = new Vector3(0, 0, 0);
         }
-        //Debug.Log(maxSide);
     }
 
     // Update is called once per frame
