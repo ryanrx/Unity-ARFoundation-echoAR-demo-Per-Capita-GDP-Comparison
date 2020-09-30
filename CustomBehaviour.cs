@@ -101,6 +101,7 @@ public class CustomBehaviour : MonoBehaviour
                         // parse the stat
                         int stat = int.Parse(statString);
 
+                        // object to store data
                         Data data;
                         // rescale the object if it already exists and stat changes
                         if (dataMap.TryGetValue(category, out data))
@@ -113,7 +114,7 @@ public class CustomBehaviour : MonoBehaviour
                                 float oldSide = (float)System.Math.Pow(data.stat, (1.0 / 3));
                                 float oldScale = oldSide / maxSide / 10f;
                                 data.categ.transform.localScale = new Vector3(scale, scale, scale);
-                                data.categ.transform.position += new Vector3(5f * (scale - oldScale), 0, -30f * (scale * scale - oldScale * oldScale));
+                                data.categ.transform.position += new Vector3(9f * (scale - oldScale), 0, -30f * (scale * scale - oldScale * oldScale));
                                 data.stat = stat;
                             }
                         }
@@ -133,11 +134,11 @@ public class CustomBehaviour : MonoBehaviour
                             float xdisp = 9f * scale;
                             float zdisp = -30f * scale * scale;
                             categ.transform.localScale = new Vector3(scale, scale, scale);
-                            categ.transform.position = new Vector3(5f + 0.3f * count + xdisp, 0, zdisp);
+                            categ.transform.position = new Vector3(1f + 0.3f * count + xdisp, 0, zdisp);
                             count++;
                             //Debug.Log(count);
 
-                            // set a common parent for model and text
+                            // set a common parent for model and text, so it would be easier to delete
                             GameObject ballBase = new GameObject("ballBase" + category);
                             ballBase.AddComponent<MeshFilter>();
                             ballBase.name = category;
